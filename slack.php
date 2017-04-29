@@ -30,6 +30,7 @@ task('deploy:slack', function () {
     $revision = trim(runLocally('git log -n 1 --format="%h"'));
     $stage = get('stages')[0];
     $branch = get('branch');
+    $app_name = 
     if (input()->hasOption('branch')) {
         $inputBranch = input()->getOption('branch');
         if (!empty($inputBranch)) {
@@ -51,7 +52,7 @@ task('deploy:slack', function () {
                     $stage,
                     $user
                 ),
-                'title'    => 'Deployment of {{app}} Complete',
+                'title'    => sprintf('Deployment of %s complete.', isset($config['app']) ? $config['app'] : 'app-name'),
                 'fallback' => sprintf('Deployment to %s complete.', $stage),
                 'color'    => '#7CD197',
                 'fields'   => [
@@ -68,6 +69,11 @@ task('deploy:slack', function () {
                     [
                         'title' => 'Branch',
                         'value' => $branch,
+                        'short' => true,
+                    ],
+                    [
+                        'title' => 'Host',
+                        'value' => get('server.name'),
                         'short' => true,
                     ],
                     [
