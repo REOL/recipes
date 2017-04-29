@@ -51,7 +51,7 @@ task('deploy:slack', function () {
                     $stage,
                     $user
                 ),
-                'title'    => sprintf('Deployment of %s complete.', isset($config['app']) ? $config['app'] : 'app-name'),
+                'title'    => 'Deployment of {{app_name}} complete.',
                 'fallback' => sprintf('Deployment to %s complete.', $stage),
                 'color'    => '#7CD197',
                 'fields'   => [
@@ -68,11 +68,6 @@ task('deploy:slack', function () {
                     [
                         'title' => 'Branch',
                         'value' => $branch,
-                        'short' => true,
-                    ],
-                    [
-                        'title' => 'Host',
-                        'value' => get('server.name'),
                         'short' => true,
                     ],
                     [
@@ -113,7 +108,7 @@ task('deploy:slack', function () {
         '{{app_name}}'     => isset($config['app']) ? $config['app'] : 'app-name',
     ];
     $config['message'] = strtr($config['message'], $messagePlaceHolders);
-
+    
     $urlParams = [
         'channel'    => $config['channel'],
         'token'      => $config['token'],
@@ -136,6 +131,7 @@ task('deploy:slack', function () {
     }
 
     if (isset($config['attachments'])) {
+        $config['attachments']['title'] = strtr($config['app'], $messagePlaceHolders);
         $urlParams['attachments'] = json_encode($config['attachments']);
     }
 
