@@ -51,7 +51,7 @@ task('deploy:slack', function () {
                     $stage,
                     $user
                 ),
-                'title'    => 'Deployment of {{app_name}} Complete',
+                'title'    => 'Deployment of {{app}} Complete',
                 'fallback' => sprintf('Deployment to %s complete.', $stage),
                 'color'    => '#7CD197',
                 'fields'   => [
