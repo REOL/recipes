@@ -38,7 +38,7 @@ task('deploy:slack', function () {
     }
     $defaultConfig = [
         'channel'     => '#general',
-        'icon'        => ':sunny:',
+        'icon'        => ':octocat:',
         'username'    => 'Deploy',
         'message'     => "Deployment to `{{host}}` on *{{stage}}* was successful\n({{release_path}})",
         'app'         => 'app-name',
@@ -51,7 +51,7 @@ task('deploy:slack', function () {
                     $stage,
                     $user
                 ),
-                'title'    => 'Deployment Complete',
+                'title'    => 'Deployment of {{app_name}} Complete',
                 'fallback' => sprintf('Deployment to %s complete.', $stage),
                 'color'    => '#7CD197',
                 'fields'   => [
