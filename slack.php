@@ -30,7 +30,6 @@ task('deploy:slack', function () {
     $revision = trim(runLocally('git log -n 1 --format="%h"'));
     $stage = get('stages')[0];
     $branch = get('branch');
-    $app_name = 
     if (input()->hasOption('branch')) {
         $inputBranch = input()->getOption('branch');
         if (!empty($inputBranch)) {
