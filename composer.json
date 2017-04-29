@@ -1,5 +1,5 @@
 {
-    "name": "deployer/recipes",
+    "name": "reol/recipes",
     "description": "3rd party deployer recipes",
     "type": "library",
     "keywords": [
